@@ -14,7 +14,7 @@ jobs:
       run: wget http://www.dhondt.de/ccx_2.17.src.tar.bz2
     - name: Unpack Calculix & store path
       run: bzip2 -d ccx_2.17.src.tar.bz2 && tar -xf ccx_2.17.src.tar && 
-        export CCX=$(pwd)
+        export CCX=$(pwd)/CalculiX/ccx_2.17/src
     - uses: actions/checkout@v2
       with:
         ref: v2.17_build
