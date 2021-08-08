@@ -14,12 +14,12 @@ jobs:
       run: wget http://www.dhondt.de/ccx_2.17.src.tar.bz2
     - name: Unpack Calculix
       run: bzip2 -d ccx_2.17.src.tar.bz2 && tar -xf ccx_2.17.src.tar && pwd
-    - run: export CCX=$(pwd)/CalculiX/ccx_2.17/src
+    - run: echo "{CCX}={$(pwd)/CalculiX/ccx_2.17/src}" >> $GITHUB_ENV
     - uses: actions/checkout@v2
       with:
         ref: v2.17_build
     - name: Show paths
       run: echo $CCX
-    - name: make
+    - name: make CCX=${{env.CCX}}
       run: make -j 4
 
