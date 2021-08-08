@@ -19,5 +19,5 @@ jobs:
       with:
         ref: v2.17_build
     - name: make
-      run: make -j 4
+      run: echo $(CCX) && make -j 4
 
