@@ -3,6 +3,7 @@
 # Set the following variables before building:
 # Path to original CalculiX source (e.g. $(HOME)/ccx_2.17/src )
 # CCX             = $(HOME)/PathTo/CalculiX/ccx_2.17/src
+CCX 		  = $(CCX)
 # Path to SPOOLES main directory (e.g. $(HOME)/SPOOLES.2.2 )
 SPOOLES         = $(HOME)/PathTo/SPOOLES
 # Path to ARPACK main directory (e.g. $(HOME)/ARPACK )
