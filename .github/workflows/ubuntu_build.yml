@@ -1,0 +1,23 @@
+name: Calculix 2.17 with preCICE adapter test build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: install dependencies
+      run: sudo apt install libarpack2-dev libspooles-dev libyaml-cpp-dev -y
+    - name: Download Calculix
+      run: wget http://www.dhondt.de/ccx_2.17.src.tar.bz2
+    - name: Unpack Calculix & store path
+      run: bzip2 -d ccx_2.17.src.tar.bz2 && tar -xf ccx_2.17.src.tar && 
+        export CCX_PATH=$(pwd)
+    - uses: actions/checkout@v2
+      with:
+        ref: v2.17_build
+    - name: make
+      run: make -j 4
+
