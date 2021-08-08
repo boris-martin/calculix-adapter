@@ -19,7 +19,7 @@ jobs:
       with:
         ref: v2.17_build
     - name: Show paths
-      run: echo $(CCX)
+      run: echo $CCX
     - name: make
       run: make -j 4
 
