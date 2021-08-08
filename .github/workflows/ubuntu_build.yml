@@ -18,6 +18,8 @@ jobs:
     - uses: actions/checkout@v2
       with:
         ref: v2.17_build
+    - name: Show paths
+      run: echo $(CCX)
     - name: make
-      run: echo $(CCX) && make -j 4
+      run: make -j 4
 
