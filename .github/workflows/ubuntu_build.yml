@@ -13,8 +13,8 @@ jobs:
     - name: Download Calculix
       run: wget http://www.dhondt.de/ccx_2.17.src.tar.bz2
     - name: Unpack Calculix
-      run: bzip2 -d ccx_2.17.src.tar.bz2 && tar -xf ccx_2.17.src.tar && pwd && ls $(pwd)/ccx_2.17/CalculiX/ccx_2.17/src
-    - run: echo "CCX=$(pwd)/ccx_2.17/CalculiX/ccx_2.17/src" >> $GITHUB_ENV
+      run: bzip2 -d ccx_2.17.src.tar.bz2 && tar -xf ccx_2.17.src.tar && pwd && ls && ls $(pwd)/ccx_2.17.src/CalculiX/ccx_2.17/src
+    - run: echo "CCX=$(pwd)/ccx_2.17.src/CalculiX/ccx_2.17/src" >> $GITHUB_ENV
     - uses: actions/checkout@v2
       with:
         ref: v2.17_build
