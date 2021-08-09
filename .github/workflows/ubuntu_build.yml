@@ -12,7 +12,7 @@ jobs:
       with:
         ref: v2.17_build
     - name: get preCICE
-      run: wget https://github.com/precice/precice/releases/download/v2.2.0/libprecice2_2.2.0_focal.deb |
+      run: wget https://github.com/precice/precice/releases/download/v2.2.0/libprecice2_2.2.0_focal.deb &&
         sudo dpkg -i ./libprecice2_2.2.0_focal.deb -y
     - name: install dependencies
       run: sudo apt install libarpack2-dev libspooles-dev libyaml-cpp-dev -y
