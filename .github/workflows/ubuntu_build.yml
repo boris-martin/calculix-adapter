@@ -26,5 +26,5 @@ jobs:
     - name: make
       run: make -j 4
     - name: Test run
-      run: ./bin/ccx_preCICE -v
+      run: ./bin/ccx_preCICE -h
 
