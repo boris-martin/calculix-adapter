@@ -69,7 +69,7 @@ FC = mpifort
 
 # Include a list of all the source files
 include $(CCX)/Makefile.inc
-SCCXMAIN = ccx_2.16.c
+SCCXMAIN = ccx_2.17.c
 
 # Append additional sources
 SCCXC += nonlingeo_precice.c CCXHelpers.c PreciceInterface.c
@@ -103,7 +103,7 @@ OCCXC += $(OBJDIR)/ConfigReader.o
 
 
 $(OBJDIR)/ccx_preCICE: $(OBJDIR) $(OCCXMAIN) $(OBJDIR)/ccx_2.17.a
-	$(FC) -fopenmp -Wall -O3 -o $@ $(OCCXMAIN) $(OBJDIR)/ccx_2.16.a $(LIBS)
+	$(FC) -fopenmp -Wall -O3 -o $@ $(OCCXMAIN) $(OBJDIR)/ccx_2.17.a $(LIBS)
 
 $(OBJDIR)/ccx_2.17.a: $(OCCXF) $(OCCXC)
 	ar vr $@ $?
