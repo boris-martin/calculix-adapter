@@ -19,7 +19,7 @@ jobs:
       with:
         ref: v2.17_build
     - name: Show paths
-      run: echo "${{env.CCX}}"
+      run: echo "${{env.CCX}}" && ls "${{env.CCX}}"
     - name: make CCX="${{env.CCX}}"
       run: make -j 4
 
