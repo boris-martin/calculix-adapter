@@ -12,5 +12,7 @@ jobs:
       with:
         ref: v2.17_build
     - name: Fetch CCX source & unpack it
-      run: cd /usr/local/ && sudo wget http://www.dhondt.de/ccx_2.17.src.tar.bz2 && sudo bunzip2 ccx_2.17.src.tar.bz2 && sudo tar -xvf ccx_2.17.src.tar && ls /usr/local
+      run: cd /usr/local/ && sudo wget http://www.dhondt.de/ccx_2.17.src.tar.bz2 && sudo bunzip2 ccx_2.17.src.tar.bz2 && sudo tar -xvf ccx_2.17.src.tar
+    - name: Build PaStiX dependencies - 1 : OpenBLAS
+      run: cd ~ && https://github.com/xianyi/OpenBLAS && cd OpenBLAS && make
 
