@@ -1,0 +1,16 @@
+name: Calculix 2.17 with preCICE adapter test build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: v2.17_build
+    - name: Fetch CCX source & unpack it
+      run: cd /usr/local/ && wget http://www.dhondt.de/ccx_2.17.src.tar.bz2 && bunzip2 ccx_2.17.src.tar.bz2 && tar -xvf ccx_2.17.src.tar && ls /usr/local
+
