@@ -18,6 +18,6 @@ jobs:
     - name: Download hwloc 2.1.0
       run: mkdir -p ~/PaStiX/ && cd ~/PaStiX/ && wget https://download.open-mpi.org/release/hwloc/v2.1/hwloc-2.1.0.tar.bz2
     - name: Unpack hwloc and copy the build script
-      run: cd ~/PaStiX && bunzip2 hwloc-2.1.0.tar.bz2 && tar -xf hwloc-2.1.0.tar && sudo cp /usr/local/CalculiX/ccx_2.17/src/make_hwloc.sh .
+      run: cd ~/PaStiX && bunzip2 hwloc-2.1.0.tar.bz2 && tar -xf hwloc-2.1.0.tar && sudo cp /usr/local/CalculiX/ccx_2.17/src/make_hwloc.sh ./hwloc-2.1.0
     - name: Run the build script
-      run: cd ~/PaStiX/hwloc-2.1.0 && ./make_hwloc.sh
+      run: cd ~/PaStiX/hwloc-2.1.0 && ls && ./make_hwloc.sh
