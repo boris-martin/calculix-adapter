@@ -15,4 +15,7 @@ jobs:
       run: cd /usr/local/ && sudo wget http://www.dhondt.de/ccx_2.17.src.tar.bz2 && sudo bunzip2 ccx_2.17.src.tar.bz2 && sudo tar -xvf ccx_2.17.src.tar
     - name: Build PaStiX dependencies - OpenBLAS
       run: cd ~ && git clone https://github.com/xianyi/OpenBLAS.git && mv OpenBLAS ./OpenBLAS_i8 && pwd && ls && cd OpenBLAS_i8 && make -j 8 INTERFACE64=1
-
+    - name: Download hwloc 2.1.0
+      run: mkdir -p ~/PaStiX/ && cd ~/PaStiX/ && wget https://download.open-mpi.org/release/hwloc/v2.1/hwloc-2.1.0.tar.bz2
+    - name: Unpack hwloc and copy the build script
+      run: bunzip2 hwloc-2.1.0.tar.bz2 && tar -xfv hwloc-2.1.0.tar && pwd
