@@ -20,4 +20,4 @@ jobs:
     - name: Unpack hwloc and copy the build script
       run: cd ~/PaStiX && bunzip2 hwloc-2.1.0.tar.bz2 && tar -xf hwloc-2.1.0.tar && sudo cp /usr/local/CalculiX/ccx_2.17/src/make_hwloc.sh .
     - name: Run the build script
-      run: ./make_hwloc.sh
+      run: cd ~/PaStiX/hwloc-2.1.0 && ./make_hwloc.sh
