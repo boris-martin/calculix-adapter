@@ -31,7 +31,7 @@ jobs:
     - name: Run the build script
       run: |
         cd ~/PaStiX/hwloc_i8 && echo $HOME &&
-        sudo umask 022 && 
+        umask 022 && 
         ./configure --prefix=$HOME/PaStiX/hwloc_i8 CC=gcc CXX=g++ &&
         make -j8 &&
         sudo make install
