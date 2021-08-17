@@ -36,13 +36,19 @@ jobs:
       run: cd ~/PaStiX && git clone -b pastix-6.0.2 --single-branch https://bitbucket.org/mfaverge/parsec.git && ls
     - name: Copy the build script and run it
       run: | 
-        sudo cp /usr/local/CalculiX/ccx_2.17/src/make_parsec.sh ~/PaStiX/parsec && cd ~/PaStiX/parsec && sudo ./make_parsec.sh
+        sudo cp /usr/local/CalculiX/ccx_2.17/src/make_parsec.sh ~/PaStiX/parsec &&
+        cd ~/PaStiX/parsec && 
+        sudo ./make_parsec.sh
     - name: Download scotch_6.0.8 and build
       run: |
         cd ~/PaStiX &&
         wget https://gforge.inria.fr/frs/download.php/file/38114/scotch_6.0.8.tar.gz &&
         tar -xf scotch_6.0.8.tar.gz &&
-        ls
+    - name: Copy the build script and run it
+      run: |
+        sudo cp /usr/local/CalculiX/ccx_2.17/src/make_scotch.sh ~/PaStiX/scotch_6.0.8 &&
+        cd ~/PaStiX/scotch_6.0.8 &&
+        sudo ./make_scotch.sh
     - name: Test Working dir
-      run: pwd && ls
-      working-directory: ~/PaStiX
+      run: pwd
+      working-directory: $HOME/PaStiX
