@@ -29,12 +29,13 @@ jobs:
       run: |
         mv ~/PaStiX/hwloc-2.1.0 ~/PaStiX/hwloc_i8
     - name: Run the build script
-      run: cd ~/PaStiX/hwloc_i8 && sudo cat make_hwloc.sh && sudo ./make_hwloc.sh
+      run: |
+        cd ~/PaStiX/hwloc_i8 
+        && sudo umask 022 && ./configure --prefix=$HOME/PaStiX/hwloc_i8 CC=gcc CXX=g++ 
+        && make -j8
+        && sudo make install
     - name: Download parsec
       run: cd ~/PaStiX && git clone -b pastix-6.0.2 --single-branch https://bitbucket.org/mfaverge/parsec.git && ls
     - name: Copy the build script and run it
       run: | 
-        sudo cp /usr/local/CalculiX/ccx_2.17/src/make_parsec.sh ~/PaStiX/parsec && cd ~/PaStiX/parsec 
-        && sudo umask 022 && ./configure --prefix=$HOME/PaStiX/hwloc_i8 CC=gcc CXX=g++ 
-        && make -j8
-        && make install
+        sudo cp /usr/local/CalculiX/ccx_2.17/src/make_parsec.sh ~/PaStiX/parsec && cd ~/PaStiX/parsec && sudo ./make_parsec.sh
