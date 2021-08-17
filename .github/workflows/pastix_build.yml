@@ -30,9 +30,10 @@ jobs:
         mv ~/PaStiX/hwloc-2.1.0 ~/PaStiX/hwloc_i8
     - name: Run the build script
       run: |
-        cd ~/PaStiX/hwloc_i8 
-        && sudo umask 022 && ./configure --prefix=$HOME/PaStiX/hwloc_i8 CC=gcc CXX=g++ 
-        && make -j8
+        cd ~/PaStiX/hwloc_i8 && echo $HOME &&
+        sudo umask 022 && 
+        ./configure --prefix=$HOME/PaStiX/hwloc_i8 CC=gcc CXX=g++ &&
+        make -j8 &&
         && sudo make install
     - name: Download parsec
       run: cd ~/PaStiX && git clone -b pastix-6.0.2 --single-branch https://bitbucket.org/mfaverge/parsec.git && ls
