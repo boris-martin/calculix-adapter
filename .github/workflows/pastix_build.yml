@@ -55,6 +55,7 @@ jobs:
       run: |
         cd ~/PaStiX &&
         git clone https://github.com/boris-martin/PaStiX4CalculiX &&
+        ls ~/PaStiX/hwloc_i8 &&
         mv ./PaStiX4CalculiX/ ./pastix_src &&
         sudo cp /usr/local/CalculiX/ccx_2.17/src/make_pastix.sh ~/PaStiX/pastix_src &&
         cd pastix_src && 
