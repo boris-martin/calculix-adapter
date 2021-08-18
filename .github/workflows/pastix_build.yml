@@ -66,6 +66,12 @@ jobs:
         cd ~/PaStiX/scotch_6.0.8 &&
         sudo ./make_scotch.sh
         
+    - name: Inspect folders
+      run: |
+        echo "Home folder : " &&
+        ls ~/PaStiX &&
+        echo "Root folder : " &&
+        sudo ls /root/
         
     - name: Clone PaStiX and the buildscript
       run: |
