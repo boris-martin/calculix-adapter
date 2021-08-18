@@ -65,7 +65,7 @@ jobs:
       run: |
         sudo cp /usr/local/CalculiX/ccx_2.17/src/make_scotch.sh ~/PaStiX/scotch_6.0.8 &&
         cd ~/PaStiX/scotch_6.0.8 &&
-        sudo chmod 777 make_scotch &&
+        sudo chmod 777 ./make_scotch.sh &&
         ./make_scotch.sh
         
     - name: Inspect folders
