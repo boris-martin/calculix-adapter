@@ -51,4 +51,4 @@ jobs:
         sudo ./make_scotch.sh
     - name: Test Working dir
       run: pwd
-      working-directory: $HOME
+      working-directory: /
