@@ -38,7 +38,7 @@ jobs:
         cd ~/PaStiX/hwloc-2.1.0 && echo $HOME &&
         umask 022 && 
         ./configure --prefix=$HOME/PaStiX/hwloc_i8 CC=gcc CXX=g++ &&
-        make -j8 &&
+        make -j8
         
     - name: Install hwloc
       run:  cd ~/PaStiX/hwloc-2.1.0 && sudo make install
