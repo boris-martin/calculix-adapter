@@ -12,7 +12,7 @@ jobs:
       with:
         ref: v2.17_build
     - name: install CUDA
-      run: sudo apt install nvidia-cuda-toolkit nvidia-cuda-dev libcupti-dev -y
+      run: sudo apt update && sudo apt install nvidia-cuda-toolkit nvidia-cuda-dev libcupti-dev -y
     - name: Fetch CCX source & unpack it
       run: |
         cd /usr/local/ && sudo wget http://www.dhondt.de/ccx_2.17.src.tar.bz2 && 
