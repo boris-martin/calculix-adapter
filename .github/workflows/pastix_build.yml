@@ -73,7 +73,7 @@ jobs:
         echo "Home folder : " &&
         ls ~/PaStiX &&
         echo "Root folder : " &&
-        sudo ls /root/PaStiX
+        sudo ls /root/
         
     - name: Clone PaStiX and the buildscript
       run: |
