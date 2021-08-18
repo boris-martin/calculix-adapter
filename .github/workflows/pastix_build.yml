@@ -51,7 +51,7 @@ jobs:
         sudo cp /usr/local/CalculiX/ccx_2.17/src/make_scotch.sh ~/PaStiX/scotch_6.0.8 &&
         cd ~/PaStiX/scotch_6.0.8 &&
         sudo ./make_scotch.sh
-    - name: Clone PaStiX, the buildscript then run it
+    - name: Clone PaStiX and the buildscript
       run: |
         cd ~/PaStiX &&
         git clone https://github.com/boris-martin/PaStiX4CalculiX &&
@@ -59,7 +59,12 @@ jobs:
         mv ./PaStiX4CalculiX/ ./pastix_src &&
         sudo cp /usr/local/CalculiX/ccx_2.17/src/make_pastix.sh ~/PaStiX/pastix_src &&
         cd pastix_src && 
+        sudo cat ./my_make_pastix.sh
+    - name: Run PaStiX script
+      run: |
+        cd ~/PaStiX/pastix_src &&
         sudo bash ./my_make_pastix.sh
+        
     - name: Test Working dir
       run: pwd
       working-directory: /
