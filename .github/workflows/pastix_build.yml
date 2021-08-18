@@ -65,7 +65,8 @@ jobs:
       run: |
         sudo cp /usr/local/CalculiX/ccx_2.17/src/make_scotch.sh ~/PaStiX/scotch_6.0.8 &&
         cd ~/PaStiX/scotch_6.0.8 &&
-        sudo ./make_scotch.sh
+        sudo chmod 777 make_scotch &&
+        ./make_scotch.sh
         
     - name: Inspect folders
       run: |
@@ -87,7 +88,7 @@ jobs:
     - name: Run PaStiX script
       run: |
         cd ~/PaStiX/pastix_src &&
-        sudo bash ./my_make_pastix.sh
+        sudo chmod 777 ./make_pastix ./make_pastix.sh
         
     - name: Test Working dir
       run: pwd
