@@ -13,44 +13,60 @@ jobs:
         ref: v2.17_build
     - name: install CUDA
       run: sudo apt update && sudo apt install nvidia-cuda-toolkit nvidia-cuda-dev libcupti-dev -y
+      
     - name: Fetch CCX source & unpack it
       run: |
         cd /usr/local/ && sudo wget http://www.dhondt.de/ccx_2.17.src.tar.bz2 && 
         sudo bunzip2 ccx_2.17.src.tar.bz2 && sudo tar -xvf ccx_2.17.src.tar
+        
     - name: Build PaStiX dependencies - OpenBLAS
       run: |
         cd ~ && git clone https://github.com/xianyi/OpenBLAS.git && mv OpenBLAS ./OpenBLAS_i8 && pwd && ls &&
         cd OpenBLAS_i8 && make -j 8 INTERFACE64=1 && sudo make install
+        
+        
     - name: Download hwloc 2.1.0
       run: mkdir -p ~/PaStiX/ && cd ~/PaStiX/ && wget https://download.open-mpi.org/release/hwloc/v2.1/hwloc-2.1.0.tar.bz2
+      
     - name: Unpack hwloc and copy the build script
       run: |
         cd ~/PaStiX && bunzip2 hwloc-2.1.0.tar.bz2 && tar -xf hwloc-2.1.0.tar && 
         sudo cp /usr/local/CalculiX/ccx_2.17/src/make_hwloc.sh ~/PaStiX/hwloc-2.1.0/make_hwloc.sh
+        
     - name: Run the build script
       run: |
         cd ~/PaStiX/hwloc-2.1.0 && echo $HOME &&
         umask 022 && 
         ./configure --prefix=$HOME/PaStiX/hwloc_i8 CC=gcc CXX=g++ &&
         make -j8 &&
-        sudo make install
+        
+    - name: Install hwloc
+      run:  cd ~/PaStiX/hwloc-2.1.0 && sudo make install
+      
+      
     - name: Download parsec
       run: cd ~/PaStiX && git clone -b pastix-6.0.2 --single-branch https://bitbucket.org/mfaverge/parsec.git && ls
+      
     - name: Copy the build script and run it
       run: | 
         sudo cp /usr/local/CalculiX/ccx_2.17/src/make_parsec.sh ~/PaStiX/parsec &&
         cd ~/PaStiX/parsec && 
         sudo ./make_parsec.sh
+        
+        
     - name: Download scotch_6.0.8 and unpack
       run: |
         cd ~/PaStiX &&
         wget https://gforge.inria.fr/frs/download.php/file/38114/scotch_6.0.8.tar.gz &&
         tar -xf scotch_6.0.8.tar.gz
+        
     - name: Copy the build script and run it
       run: |
         sudo cp /usr/local/CalculiX/ccx_2.17/src/make_scotch.sh ~/PaStiX/scotch_6.0.8 &&
         cd ~/PaStiX/scotch_6.0.8 &&
         sudo ./make_scotch.sh
+        
+        
     - name: Clone PaStiX and the buildscript
       run: |
         cd ~/PaStiX &&
@@ -60,6 +76,7 @@ jobs:
         sudo cp /usr/local/CalculiX/ccx_2.17/src/make_pastix.sh ~/PaStiX/pastix_src &&
         cd pastix_src && 
         sudo cat ./my_make_pastix.sh
+        
     - name: Run PaStiX script
       run: |
         cd ~/PaStiX/pastix_src &&
