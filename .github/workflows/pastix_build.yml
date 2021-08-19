@@ -85,12 +85,12 @@ jobs:
         mv ./PaStiX4CalculiX/ ./pastix_src &&
         sudo cp /usr/local/CalculiX/ccx_2.17/src/make_pastix.sh ~/PaStiX/pastix_src &&
         cd pastix_src && 
-        sudo cat ./my_make_pastix.sh
+        sudo cat ./make_pastix.sh
         
     - name: Run PaStiX script
       run: |
         cd ~/PaStiX/pastix_src &&
-        sudo chmod 777 ./my_make_pastix.sh && ./my_make_pastix.sh
+        sudo chmod 777 ./make_pastix.sh && ./make_pastix.sh
         
     - name: Test Working dir
       run: pwd
