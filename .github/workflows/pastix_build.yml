@@ -21,6 +21,9 @@ jobs:
         cd /usr/local/ && sudo wget http://www.dhondt.de/ccx_2.17.src.tar.bz2 && 
         sudo bunzip2 ccx_2.17.src.tar.bz2 && sudo tar -xvf ccx_2.17.src.tar
         
+    - name: Install Boost Threads (required ?)
+      run: sudo apt install libboost-thread-dev -y
+        
     - name: Build PaStiX dependencies - OpenBLAS
       run: |
         cd ~ && git clone https://github.com/xianyi/OpenBLAS.git && mv OpenBLAS ./OpenBLAS_i8 && pwd && ls &&
