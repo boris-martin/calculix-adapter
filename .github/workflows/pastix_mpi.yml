@@ -12,7 +12,7 @@ jobs:
       with:
         ref: v2.17_build
     - name: install MPI
-      run: sudo apt update && sudo apt install libopenmpi-dev -y
+      run: sudo apt update && sudo apt install libopenmpi-dev openmpi-bin openmpi-common mpich -y
     - name: install pthreads (necessary ?)
       run: sudo apt-get install libpthread-stubs0-dev -y
       
