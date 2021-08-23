@@ -90,7 +90,7 @@ jobs:
         ls ~/PaStiX/hwloc_i8 &&
         mv ./PaStiX4CalculiX/ ./pastix_src &&
         sudo cp /usr/local/CalculiX/ccx_2.17/src/make_pastix.sh ~/PaStiX/pastix_src &&
-        cd pastix_src && 
+        cd pastix_src && git submodule init && git submodule update &&
         sudo cat ./make_pastix.sh
         
     - name: Run PaStiX script
