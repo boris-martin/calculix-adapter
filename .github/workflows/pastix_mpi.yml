@@ -60,7 +60,35 @@ jobs:
         sudo cp /usr/local/CalculiX/ccx_2.17/src/make_parsec.sh ~/PaStiX/parsec &&
         cd ~/PaStiX/parsec && 
         sudo chmod 777 make_parsec.sh && 
-        ./make_parsec.sh
+
+        if ! [[ -d build ]]; then
+            mkdir build
+        fi
+        cd build &&
+
+        export INSTALLPATH="~/PaStiX/parsec_i8"&&
+        umask 022 &&
+
+        # fixes
+        sed -i '/-1 == cpu/i return cpu;' parsec/bindthread.c &&
+
+        cmake \
+        -DCMAKE_CXX_COMPILER=g++ \
+        -DCMAKE_C_COMPILER=gcc \
+        -DCMAKE_Fortran_COMPILER=gfortran \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=${INSTALLPATH} \
+        -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-10.2 \
+        -DCUDA_DIR=/usr/local/cuda-10.2 \
+        -DCUDA_USE_STATIC_CUDA_RUNTIME=OFF \
+        -DCMAKE_CUDA_HOST_COMPILER=gcc \
+        -DPARSEC_GPU_WITH_CUDA=OFF \
+        -DHWLOC_DIR=~/PaStiX/hwloc_i8 \
+        .. &&
+        make -j8 && 
+        rm -rf ${INSTALLPATH} &&
+        make install
+
         
         
     - name: Download scotch_6.0.8 and unpack
