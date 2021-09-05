@@ -71,8 +71,8 @@ jobs:
         umask 022 &&
 
         # fixes
-        ls &&
-        sed -i '/-1 == cpu/i return cpu;' ./parsec/bindthread.c &&
+        ls ~/PaStiX/parsec/parsec &&
+        sed -i '/-1 == cpu/i return cpu;' ~/PaStiX/parsec/parsec/bindthread.c &&
 
         cmake \
         -DCMAKE_CXX_COMPILER=g++ \
