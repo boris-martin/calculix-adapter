@@ -57,7 +57,7 @@ jobs:
       
     - name: Copy the build script and run it
       run: | 
-        cd ~/PaStiX/parsec && ls
+        cd ~/PaStiX/parsec && ls ./parsec
         sudo cp /usr/local/CalculiX/ccx_2.17/src/make_parsec.sh ~/PaStiX/parsec &&
         
         sudo chmod 777 make_parsec.sh && 
