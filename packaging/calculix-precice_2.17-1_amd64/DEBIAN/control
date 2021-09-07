@@ -1,0 +1,8 @@
+Package: calculix-precice
+Version: 2.17
+Architecture: amd64
+Maintainer: PreCICE team (precice.org)
+Depends: libprecice2, libspooles2.2, libyaml-cpp0.6
+Bugs: https://github.com/precice/calculix-adapter/issues
+Description: PreCICE adapter for CalculiX.
+ CalculiX is a Finite Element Method solver for structural mechanics. PreCICE is a library for coupling solvers in partitioned multiphysics simulations.
