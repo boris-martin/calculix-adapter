@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: v2.17_build
+        ref: deb
     - name: get preCICE
       run: wget https://github.com/precice/precice/releases/download/v2.2.0/libprecice2_2.2.0_focal.deb &&
         sudo apt install ./libprecice2_2.2.0_focal.deb -y
