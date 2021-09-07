@@ -35,7 +35,7 @@ jobs:
     - name: Create Debian Package
       run: |
              mkdir -p packaging/calculix-precice_2.17-1_amd64/usr/local/bin &&
-             cp ./bin/ccx_preCICE /packaging/calculix-precice_2.17-1_amd64/usr/local/bin &&
+             cp ./bin/ccx_preCICE /packaging/calculix-precice_2.17-1_amd64/usr/local/bin/ccx_preCICE &&
              cd packaging && dpkg-deb --root-owner-group --build calculix-precice_2.17-1_amd64/
     - name: Store Debian Package
       uses: actions/upload-artifact@v2
