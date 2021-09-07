@@ -27,4 +27,9 @@ jobs:
       run: make -j 4
     - name: Test run
       run: ./bin/ccx_preCICE -h
+    - name: Store binary artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ccx_preCICE
+        path: ./bin/ccx_preCICE
 
