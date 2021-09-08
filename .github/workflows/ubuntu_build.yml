@@ -24,7 +24,7 @@ jobs:
     - name: Show paths
       run: echo "${{env.CCX}}" && ls "${{env.CCX}}"
     - name: make
-      run: make -j 4
+      run: make -j 4 CCX=${CCX}
     - name: Test run
       run: ./bin/ccx_preCICE -h
     - name: Store binary artifact
