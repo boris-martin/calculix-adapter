@@ -43,4 +43,4 @@ jobs:
         name: calculix-precice_2.17-1_amd64.deb
         path: ./packaging/calculix-precice_2.17-1_amd64.deb
     - name: Inspect package with lintian
-      run: lintian ./packaging/calculix-precice_2.17-1_amd64.deb
+      run: sudo apt install lintian -y && lintian ./packaging/calculix-precice_2.17-1_amd64.deb
