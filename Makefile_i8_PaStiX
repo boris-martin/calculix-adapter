@@ -14,7 +14,7 @@ SPOOLES_LIBS      = -lspooles
 # ARPACK include flags (e.g. -I$(HOME)/ARPACK)
 ARPACK_INCLUDE    =
 # ARPACK library flags (e.g. $(HOME)/ARPACK/libarpack_INTEL.a)
-ARPACK_LIBS       = /home/boris/ARPACK/libarpack_INTEL.a 
+ARPACK_LIBS       = $(HOME)/ARPACK/libarpack_INTEL.a 
 #ARPACK_LIBS       = -larpack -llapack -lblas
 #
 # yaml-cpp include flags (e.g. -I$(HOME)/yaml-cpp/include)
@@ -32,15 +32,15 @@ PKGCONF_LIBS    = $(shell pkg-config --libs libprecice)
 OBJDIR = bin
 
 # For PaStiX only
-PASTIX_LIBS = /home/boris/PaStiX/hwloc_i8/lib/libhwloc.so /home/boris/OpenBLAS_i8/libopenblas.a \
-  /home/boris/PaStiX/pastix_i8/lib/libpastix.a /home/boris/OpenBLAS_i8/libopenblas.a -lpthread -lm /home/boris/PaStiX/pastix_i8/lib/libspm.a \
-  /home/boris/PaStiX/pastix_i8/lib/libpastix_parsec.a /home/boris/PaStiX/pastix_i8/lib/libpastix_kernels.a /home/boris/OpenBLAS_i8/libopenblas.a -lrt \
-  /home/boris/PaStiX/pastix_i8/lib/libpastix_kernels_cuda.a /home/boris/PaStiX/parsec_i8/lib/libparsec.so \
+PASTIX_LIBS = $(HOME)/PaStiX/hwloc_i8/lib/libhwloc.so $(HOME)/OpenBLAS_i8/libopenblas.a \
+  $(HOME)/PaStiX/pastix_i8/lib/libpastix.a $(HOME)/OpenBLAS_i8/libopenblas.a -lpthread -lm $(HOME)/PaStiX/pastix_i8/lib/libspm.a \
+  $(HOME)/PaStiX/pastix_i8/lib/libpastix_parsec.a $(HOME)/PaStiX/pastix_i8/lib/libpastix_kernels.a $(HOME)/OpenBLAS_i8/libopenblas.a -lrt \
+  $(HOME)/PaStiX/pastix_i8/lib/libpastix_kernels_cuda.a $(HOME)/PaStiX/parsec_i8/lib/libparsec.so \
   /usr/lib/x86_64-linux-gnu/libcudart_static.a -lpthread -ldl -lrt /usr/lib/x86_64-linux-gnu/libcublas_static.a \
   /usr/lib/x86_64-linux-gnu/libculibos.a /usr/lib/x86_64-linux-gnu/libcublasLt_static.a -lrt \
-  /home/boris/PaStiX/scotch_i8/lib/libscotch.a /home/boris/PaStiX/scotch_i8/lib/libscotcherrexit.a -lpthread -lz -lm /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/libgomp.so.1
+  $(HOME)/PaStiX/scotch_i8/lib/libscotch.a $(HOME)/PaStiX/scotch_i8/lib/libscotcherrexit.a -lpthread -lz -lm /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/libgomp.so.1
 
-PASTIX_INCLUDE = -I/home/boris/PaStiX/pastix_i8/include
+PASTIX_INCLUDE = -I$(HOME)/PaStiX/pastix_i8/include
 
 # Includes and libs
 INCLUDES = \
