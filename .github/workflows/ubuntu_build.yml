@@ -13,7 +13,7 @@ jobs:
         ref: deb
     - name: get preCICE
       run: wget https://github.com/precice/precice/releases/download/v2.2.0/libprecice2_2.2.0_focal.deb &&
-        sudo apt install ./libprecice2_2.2.0_focal.deb -y
+        sudo apt install ./libprecice2_2.3.0_focal.deb -y
     - name: install dependencies
       run: sudo apt install libarpack2-dev libspooles-dev libyaml-cpp-dev -y
     - name: Download Calculix
@@ -32,15 +32,15 @@ jobs:
       with:
         name: ccx_preCICE
         path: ./bin/ccx_preCICE
-    - name: Create Debian Package
-      run: |
-             mkdir -p packaging/calculix-precice_2.17-1_amd64/usr/bin &&
-             cp ./bin/ccx_preCICE ./packaging/calculix-precice_2.17-1_amd64/usr/bin/ccx_preCICE &&
-             cd packaging && pwd && ls -al calculix-precice_2.17-1_amd64/ && dpkg-deb --root-owner-group --build calculix-precice_2.17-1_amd64
-    - name: Store Debian Package
-      uses: actions/upload-artifact@v2
-      with:
-        name: calculix-precice_2.17-1_amd64.deb
-        path: ./packaging/calculix-precice_2.17-1_amd64.deb
-    - name: Inspect package with lintian
-      run: sudo apt install lintian -y && lintian ./packaging/calculix-precice_2.17-1_amd64.deb
+    # - name: Create Debian Package
+    #   run: |
+    #          mkdir -p packaging/calculix-precice_2.17-1_amd64/usr/bin &&
+    #          cp ./bin/ccx_preCICE ./packaging/calculix-precice_2.17-1_amd64/usr/bin/ccx_preCICE &&
+    #          cd packaging && pwd && ls -al calculix-precice_2.17-1_amd64/ && dpkg-buildpackage -us -uc calculix-precice_2.17-1_amd64
+    # - name: Store Debian Package
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: calculix-precice_2.17-1_amd64.deb
+    #     path: ./packaging/calculix-precice_2.17-1_amd64.deb
+    # - name: Inspect package with lintian
+    #   run: sudo apt install lintian -y && lintian ./packaging/calculix-precice_2.17-1_amd64.deb
