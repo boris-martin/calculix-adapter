@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Update system
+      run: sudo apt update && sudo apt upgrade -y
     - uses: actions/checkout@v2
       with:
         ref: deb
