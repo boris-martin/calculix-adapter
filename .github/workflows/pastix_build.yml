@@ -39,9 +39,10 @@ jobs:
         
     - name: Run the build script of hwloc
       run: |
-        cd ~/PaStiX/hwloc-2.1.0
+        cd ~/PaStiX/hwloc-2.1.0 &&
+        sed -i 's/~/$HOME/g' make_hwloc.sh
         ./make_hwloc.sh
-    # Installation is local and "make install" is in the script
+    # Installation is local and "make install" is in the script. ~ is not recognized by github actions
       
       
     - name: Download parsec
