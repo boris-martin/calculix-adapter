@@ -16,6 +16,8 @@ jobs:
     - name: install dependencies
       run: sudo apt install build-essential cmake git gfortran flex bison zlib1g-dev nvidia-cuda-toolkit-gcc libspooles-dev libyaml-cpp-dev gcc-7 g++-7 gfortran-7
       
+    - name: "Find CUDA ??"
+      run: ls /usr/local | grep cuda
     - name: Fetch CCX source & unpack it
       run: |
         cd /usr/local/ && sudo wget http://www.dhondt.de/ccx_2.17.src.tar.bz2 && 
