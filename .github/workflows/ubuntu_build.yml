@@ -34,9 +34,10 @@ jobs:
       with:
         name: ccx_preCICE
         path: ./bin/ccx_preCICE
+    - name: Download tools for packaging
+      run: sudo apt install lintian pandoc -y
     - name: Create Debian Package
       run: |
-        sudo apt install lintian -y &&
         mkdir -p packaging/calculix-precice_2.17-1_amd64/usr/bin &&
         cp ./bin/ccx_preCICE ./packaging/calculix-precice_2.17-1_amd64/usr/bin/ccx_preCICE &&
         cd packaging && pwd && ./make_deb.sh
