@@ -1,6 +1,7 @@
- calculix-precice (2.17) unstable, urgency=medium
+calculix-precice (2.17) unstable; urgency=medium
   * Initial packaging
-  * First offical Debian package of the CalculiX adapter for preCICE
+  * First official Debian package of the CalculiX adapter for preCICE
 
-  -- Boris Martin, <boris.martin@tum.de>, Sun, 12 Sept 2021
+
+ -- Boris Martin <boris.martin@tum.de>  Tue, 19 Oct 2021 22:30:00 +0200
 
