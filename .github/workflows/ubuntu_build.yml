@@ -36,6 +36,7 @@ jobs:
         path: ./bin/ccx_preCICE
     - name: Create Debian Package
       run: |
+        sudo apt install lintian -y &&
         mkdir -p packaging/calculix-precice_2.17-1_amd64/usr/bin &&
         cp ./bin/ccx_preCICE ./packaging/calculix-precice_2.17-1_amd64/usr/bin/ccx_preCICE &&
         cd packaging && pwd && ./make_deb.sh
