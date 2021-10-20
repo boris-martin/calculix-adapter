@@ -7,14 +7,14 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-18.04, ubuntu-20.04, ubuntu-21.04]
+        os: [ubuntu-18.04, ubuntu-20.04]
         include:
           - os: ubuntu-18.04
             name: bionic
           - os: ubuntu-20.04
             name: focal
-          - os: ubuntu-21.04
-            name: hirsute
+#          - os: ubuntu-21.04
+#            name: hirsute
     runs-on: ${{matrix.os}}
     continue-on-error: true
 
