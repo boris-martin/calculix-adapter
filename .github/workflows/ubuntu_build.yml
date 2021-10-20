@@ -5,7 +5,10 @@ on: [push, pull_request]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, ubuntu-20.04, ubuntu-21.04]
+    runs-on: ${{matrix.os}}
 
     steps:
     - name: Update system
@@ -40,12 +43,12 @@ jobs:
       run: |
         mkdir -p packaging/calculix-precice_2.17-1_amd64/usr/bin &&
         cp ./bin/ccx_preCICE ./packaging/calculix-precice_2.17-1_amd64/usr/bin/ccx_preCICE &&
-        cd packaging && pwd && ./make_deb.sh
+        cd packaging && pwd && ./make_deb.sh ${{matrix.os}}
     - name: Store Debian package artifact
       uses: actions/upload-artifact@v2
       with:
-        name: calculix-precice_2.17-1_amd64.deb
-        path: packaging/calculix-precice_2.17-1_amd64.deb
+        name: "calculix-precice_2.17-1_amd64${{matrix.os}}.deb"
+        path: "packaging/calculix-precice_2.17-1_amd64${{matrix.os}}.deb"
     # - name: Store Debian Package
     #   uses: actions/upload-artifact@v2
     #   with:
