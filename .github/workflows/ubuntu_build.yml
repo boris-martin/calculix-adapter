@@ -55,8 +55,8 @@ jobs:
     - name: Store Debian package artifact
       uses: actions/upload-artifact@v2
       with:
-        name: "calculix-precice_2.17-1_amd64${{matrix.name}}.deb"
-        path: "packaging/calculix-precice_2.17-1_amd64${{matrix.name}}.deb"
+        name: "calculix-precice_2.17-1_amd64_${{matrix.name}}.deb"
+        path: "packaging/calculix-precice_2.17-1_amd64_${{matrix.name}}.deb"
     # - name: Store Debian Package
     #   uses: actions/upload-artifact@v2
     #   with:
