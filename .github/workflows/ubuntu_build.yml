@@ -7,6 +7,7 @@ jobs:
 
     strategy:
       matrix:
+        continue-on-error: true
         os: [ubuntu-18.04, ubuntu-20.04, ubuntu-21.04]
     runs-on: ${{matrix.os}}
 
