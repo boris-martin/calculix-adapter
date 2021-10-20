@@ -8,6 +8,13 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-18.04, ubuntu-20.04, ubuntu-21.04]
+        include:
+          - os: ubuntu-18.04
+            name: bionic
+          - os: ubuntu-20.04
+            name: focal
+          - os: ubuntu-21.04
+            name: hirsute
     runs-on: ${{matrix.os}}
     continue-on-error: true
 
@@ -18,7 +25,7 @@ jobs:
       with:
         ref: deb
     - name: get preCICE
-      run: wget https://github.com/precice/precice/releases/download/v2.3.0/libprecice2_2.3.0_focal.deb &&
+      run: wget https://github.com/precice/precice/releases/download/v2.3.0/libprecice2_2.3.0_${{matrix.name}}.deb &&
         sudo apt install ./libprecice2_2.3.0_focal.deb -y
     - name: install dependencies
       run: sudo apt install libarpack2-dev libspooles-dev libyaml-cpp-dev -y
@@ -44,12 +51,12 @@ jobs:
       run: |
         mkdir -p packaging/calculix-precice_2.17-1_amd64/usr/bin &&
         cp ./bin/ccx_preCICE ./packaging/calculix-precice_2.17-1_amd64/usr/bin/ccx_preCICE &&
-        cd packaging && pwd && ./make_deb.sh ${{matrix.os}}
+        cd packaging && pwd && ./make_deb.sh ${{matrix.name}}
     - name: Store Debian package artifact
       uses: actions/upload-artifact@v2
       with:
-        name: "calculix-precice_2.17-1_amd64${{matrix.os}}.deb"
-        path: "packaging/calculix-precice_2.17-1_amd64${{matrix.os}}.deb"
+        name: "calculix-precice_2.17-1_amd64${{matrix.name}}.deb"
+        path: "packaging/calculix-precice_2.17-1_amd64${{matrix.name}}.deb"
     # - name: Store Debian Package
     #   uses: actions/upload-artifact@v2
     #   with:
