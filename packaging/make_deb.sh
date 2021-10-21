@@ -3,6 +3,8 @@
 DISTRIBUTION="_$1"
 echo $DISTRIBUTION
 
+echo "Hello test"
+
 # Compress the changelog, strip the binaries
 cp changelog.Debian calculix-precice_2.17-1_amd64/usr/share/doc/calculix-precice/changelog.Debian
 # Options : -f for removing file if it was there, -n for no time stamp
