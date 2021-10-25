@@ -48,11 +48,11 @@ jobs:
     - name: Download parsec
       run: cd ~/PaStiX && git clone -b pastix-6.0.2 --single-branch https://bitbucket.org/mfaverge/parsec.git && ls
       
+      # Cuda is disabled here
     - name: Copy the build script and run it
       run: | 
         cp /usr/local/CalculiX/ccx_2.17/src/make_parsec.sh ~/PaStiX/parsec &&
         cd ~/PaStiX/parsec &&     
-      # Disable CUDA
         sed -i "s/CUDA=ON/CUDA=OFF/g" make_parsec.sh && sed -i "s/CUDA_RUNTIME=ON/CUDA_RUNTIME=OFF/g" make_parsec.sh 
         ./make_parsec.sh
         
