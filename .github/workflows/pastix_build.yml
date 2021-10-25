@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: v2.17_build
+        ref: ${{ github.ref }}
     - name: Update system
       run: sudo apt update && sudo apt upgrade -y 
     - name: install dependencies
