@@ -1,0 +1,87 @@
+name: Calculix 2.17 with PaStiX (MPI)
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.ref }}
+    - name: Update system
+      run: sudo apt update && sudo apt upgrade -y 
+    - name: install dependencies
+      run: sudo apt install build-essential cmake git gfortran flex bison zlib1g-dev libspooles-dev libyaml-cpp-dev gcc-7 g++-7 gfortran-7
+      
+    - name: Fetch CCX source & unpack it
+      run: |
+        cd /usr/local/ && sudo wget http://www.dhondt.de/ccx_2.17.src.tar.bz2 && 
+        sudo bunzip2 ccx_2.17.src.tar.bz2 && sudo tar -xvf ccx_2.17.src.tar && 
+        sudo chmod -R a+rw /usr/local/CalculiX
+        
+        
+    - name: Build PaStiX dependencies - OpenBLAS
+      run: |
+        cd ~ && git clone https://github.com/xianyi/OpenBLAS.git && mv OpenBLAS ./OpenBLAS_i8 &&
+        cd OpenBLAS_i8 && make -j 8 INTERFACE64=1 && sudo make install
+        
+        
+    - name: Download hwloc 2.1.0
+      run: mkdir -p ~/PaStiX/ && cd ~/PaStiX/ && wget https://download.open-mpi.org/release/hwloc/v2.1/hwloc-2.1.0.tar.bz2
+      
+    - name: Unpack hwloc and copy the build script
+      run: |
+        cd ~/PaStiX && bunzip2 hwloc-2.1.0.tar.bz2 && tar -xf hwloc-2.1.0.tar && 
+        cp /usr/local/CalculiX/ccx_2.17/src/make_hwloc.sh ~/PaStiX/hwloc-2.1.0/make_hwloc.sh
+        
+    - name: Run the build script of hwloc
+      run: |
+        cd ~/PaStiX/hwloc-2.1.0 &&
+        sed -i 's/~/$HOME/g' make_hwloc.sh
+        ./make_hwloc.sh
+    # Installation is local and "make install" is in the script. ~ is not recognized by github actions
+      
+      
+    - name: Download parsec
+      run: cd ~/PaStiX && git clone -b pastix-6.0.2 --single-branch https://bitbucket.org/mfaverge/parsec.git && ls
+      
+    - name: Copy the build script and run it
+      run: | 
+        cp /usr/local/CalculiX/ccx_2.17/src/make_parsec.sh ~/PaStiX/parsec &&
+        cd ~/PaStiX/parsec &&     
+      # Disable CUDA
+        sed -i "s/CUDA=ON/CUDA=OFF/g" make_parsec.sh && sed -i "s/CUDA_RUNTIME=ON/CUDA_RUNTIME=OFF/g" make_parsec.sh 
+        ./make_parsec.sh
+        
+        
+    - name: Download scotch_6.0.8 and unpack
+      run: |
+        cd ~/PaStiX &&
+        wget https://gforge.inria.fr/frs/download.php/file/38114/scotch_6.0.8.tar.gz &&
+        tar -xf scotch_6.0.8.tar.gz
+        
+    - name: Copy the build script and run it
+      run: |
+        cp /usr/local/CalculiX/ccx_2.17/src/make_scotch.sh ~/PaStiX/scotch_6.0.8 &&
+        cd ~/PaStiX/scotch_6.0.8 &&
+        ./make_scotch.sh
+        
+    - name: Clone PaStiX, the buildscript and run it
+      run: |
+        cd ~/PaStiX &&
+        git clone -b fix_no_CUDA https://github.com/boris-martin/PaStiX4CalculiX &&
+        mv ./PaStiX4CalculiX/ ./pastix_src &&
+        rm pastix_src/make_pastix.sh 
+        cp /usr/local/CalculiX/ccx_2.17/src/make_pastix.sh ~/PaStiX/pastix_src &&
+        cd pastix_src && 
+        sed -i "s/WITH_CUDA=ON/WITH_CUDA=OFF/g" make_pastix.sh
+        ./make_pastix.sh
+      # Local file VS CalculiX'one : the CCX version of make_pastix is used
+
+        
+    - name: Test Working dir
+      run: pwd
+      working-directory: /
