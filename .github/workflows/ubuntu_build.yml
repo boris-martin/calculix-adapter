@@ -50,14 +50,14 @@ jobs:
     - name: Store Debian package artifact
       uses: actions/upload-artifact@v2
       with:
-        name: "${{PACKAGE_NAME}}_${{matrix.name}}.deb"
-        path: "packaging/${{PACKAGE_NAME}}_${{matrix.name}}.deb"
+        name: "${{env.PACKAGE_NAME}}_${{matrix.name}}.deb"
+        path: "packaging/${{env.PACKAGE_NAME}}_${{matrix.name}}.deb"
     - name: Compute SHA256 checksum
-      run: sha256sum "packaging/${{PACKAGE_NAME}}_${{matrix.name}}.deb" > "packaging/${{PACKAGE_NAME}}_${{matrix.name}}.deb.sha256"
+      run: sha256sum "packaging/${{env.PACKAGE_NAME}}_${{matrix.name}}.deb" > "packaging/${{env.PACKAGE_NAME}}_${{matrix.name}}.deb.sha256"
     - name: Store SHA256 checksum as artifact
       uses: actions/upload-artifact@v2
       with:
-        name: "${{PACKAGE_NAME}}_${{matrix.name}}.deb.sha256"
-        path: "packaging/${{PACKAGE_NAME}}_${{matrix.name}}.deb.sha256"
+        name: "${{env.PACKAGE_NAME}}_${{matrix.name}}.deb.sha256"
+        path: "packaging/${{env.PACKAGE_NAME}}_${{matrix.name}}.deb.sha256"
     - name: Inspect package with lintian
       run: sudo apt install lintian -y && lintian ./packaging/${{PACKAGE_NAME}}_{{matrix.name}}.deb
