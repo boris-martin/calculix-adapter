@@ -60,4 +60,4 @@ jobs:
         name: "${{env.PACKAGE_NAME}}_${{matrix.name}}.deb.sha256"
         path: "packaging/${{env.PACKAGE_NAME}}_${{matrix.name}}.deb.sha256"
     - name: Inspect package with lintian
-      run: sudo apt install lintian -y && lintian ./packaging/${{PACKAGE_NAME}}_{{matrix.name}}.deb
+      run: sudo apt install lintian -y && lintian ./packaging/${{env.PACKAGE_NAME}}_{{matrix.name}}.deb
