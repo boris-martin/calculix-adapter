@@ -62,7 +62,7 @@ else
 	CC = mpicc
 endif
 
-FFLAGS = -Wall -O3 -fopenmp $(INCLUDES)
+FFLAGS = -Wall -O3 -fopenmp $(INCLUDES) ${ADDITIONAL_FFLAGS}
 # Note for GCC 10 or newer: add -fallow-argument-mismatch in the above flags
 FC = mpifort
 # FC = mpif90
@@ -73,7 +73,7 @@ include $(CCX)/Makefile.inc
 SCCXMAIN = ccx_$(CCX_VERSION).c
 
 # Append additional sources
-SCCXC += nonlingeo_precice.c CCXHelpers.c PreciceInterface.c
+SCCXC += nonlingeo_precice.c dyna_precice.c CCXHelpers.c PreciceInterface.c
 SCCXF += getflux.f getkdeltatemp.f
 
 
@@ -99,7 +99,7 @@ $(OBJDIR)/%.o : $(CCX)/%.f
 OCCXF = $(SCCXF:%.f=$(OBJDIR)/%.o)
 OCCXC = $(SCCXC:%.c=$(OBJDIR)/%.o)
 OCCXMAIN = $(SCCXMAIN:%.c=$(OBJDIR)/%.o)
-OCCXC += $(OBJDIR)/ConfigReader.o
+OCCXC += $(OBJDIR)/ConfigReader.o $(OBJDIR)/2D3DCoupling.o
 
 
 
