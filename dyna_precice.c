@@ -1417,30 +1417,31 @@ void dyna_precice(double **cop, ITG *nk, ITG **konp, ITG **ipkonp, char **lakonp
     Precice_AdjustSolverTimestep(&simulationData);
     /* Adapter read coupling data if available */
     Precice_ReadCouplingData(&simulationData);
+    if (icutb == 0) {
+      time0 = time;
 
-    time0 = time;
+      //    printf("\nnew increment\n");
 
-    //    printf("\nnew increment\n");
-
-    if (*nener == 1) {
-      memcpy(&enerini[0], &ener[0], sizeof(double) * mi[0] * ne0);
-      if (*ithermal != 2) {
-        memcpy(&stiini[0], &sti[0], sizeof(double) * 6 * mi[0] * ne0);
-        memcpy(&emeini[0], &eme[0], sizeof(double) * 6 * mi[0] * ne0);
+      if (*nener == 1) {
+        memcpy(&enerini[0], &ener[0], sizeof(double) * mi[0] * ne0);
+        if (*ithermal != 2) {
+          memcpy(&stiini[0], &sti[0], sizeof(double) * 6 * mi[0] * ne0);
+          memcpy(&emeini[0], &eme[0], sizeof(double) * 6 * mi[0] * ne0);
+        }
       }
-    }
-    if (Precice_IsWriteCheckpointRequired()) {
-      printf("WARNING: implicit coupling with modal dynamic simulations is not working in the current version of the adapter.\n");
-      Precice_WriteIterationCheckpoint(&simulationData, vini);
-      Precice_FulfilledWriteCheckpoint();
-    }
+      if (Precice_IsWriteCheckpointRequired()) {
+        printf("WARNING: implicit coupling with modal dynamic simulations is not working in the current version of the adapter.\n");
+        Precice_WriteIterationCheckpoint(&simulationData, vini);
+        Precice_FulfilledWriteCheckpoint();
+      }
 
-    iinc++;
-    jprint++;
+      iinc++;
+      jprint++;
 
-    if (dashpot)
-      RENEW(rpar, double, 4 + nev * (3 + nev));
+      if (dashpot)
+        RENEW(rpar, double, 4 + nev * (3 + nev));
 
+    } //end icutb == 0
     /* check for max. # of increments */
 
     if (iinc > *jmax) {
@@ -2033,6 +2034,7 @@ void dyna_precice(double **cop, ITG *nk, ITG **konp, ITG **ipkonp, char **lakonp
     }
     simulationData.fn   = fn;
     simulationData.vold = v;
+    //memcpy(&vold[0], &v[0], sizeof(double) * mt * *nk);
     Precice_WriteCouplingData(&simulationData);
     /* Adapter: Advance the coupling */
     Precice_Advance(&simulationData);
@@ -2044,6 +2046,8 @@ void dyna_precice(double **cop, ITG *nk, ITG **konp, ITG **ipkonp, char **lakonp
         icutb++;
       }
       Precice_FulfilledReadCheckpoint();
+    } else {
+      icutb = 0;
     }
 
     if (isteadystate == 1) {
